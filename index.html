@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -115,12 +114,33 @@
             box-shadow: 0 0 0 0.2rem rgba(93, 156, 236, 0.25);
         }
 
+        #time-slot-controls {
+            display: flex;
+            margin-bottom: 15px;
+            padding-left: 0;
+        }
+
+        #add-time-slot-button {
+            padding: 8px 15px;
+            font-size: 0.9em;
+            color: #FFFFFF;
+            background-color: #4CAF50; /* Green for add */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            margin-left: 5px; /* Align with notepad structure roughly */
+        }
+        #add-time-slot-button:hover {
+            background-color: #45a049;
+        }
+
         #notepad-grid-container {
             /* Styles for notepad grid will be applied to #notepad-container inside this */
         }
         #notepad-container {
             display: grid;
-            grid-template-columns: minmax(120px, auto) repeat(7, 1fr);
+            grid-template-columns: minmax(150px, auto) repeat(7, 1fr); /* Adjusted first column for new buttons */
             gap: 1px;
             background-color: #C5D9E0; /* Grid lines color - muted blue/grey */
             border: 1px solid #C5D9E0;
@@ -128,14 +148,14 @@
             overflow: hidden;
         }
         .grid-cell {
-            background-color: #FFFFFF; /* White cells - this is for the cell itself, note-area inside will have its own bg */
+            background-color: #FFFFFF;
             padding: 0;
             display: flex;
             align-items: stretch;
             justify-content: stretch;
         }
         .header-cell, .time-slot-label {
-            background-color: #E0EAF0; /* Light muted blue for headers */
+            background-color: #E0EAF0;
             font-weight: bold;
             text-align: center;
             padding: 10px 8px;
@@ -143,11 +163,40 @@
             align-items: center;
             justify-content: center;
             font-size: 0.9em;
-            color: #3A506B; /* Muted blue text for headers */
+            color: #3A506B;
+            position: relative; /* For positioning remove button */
         }
         .time-slot-label {
-            white-space: nowrap;
+            justify-content: space-between; /* To push remove button to the side */
+            white-space: normal; /* Allow text to wrap if needed */
         }
+        .editable-slot-text {
+            flex-grow: 1;
+            text-align: left;
+            padding: 2px 5px;
+            border-radius: 3px;
+            cursor: text;
+        }
+        .editable-slot-text:focus {
+            background-color: #FFFACD; /* LemonChiffon for focus */
+            outline: 1px dashed #3B7DC4;
+            box-shadow: 0 0 5px rgba(59, 125, 196, 0.3);
+        }
+        .remove-slot-btn {
+            background: none;
+            border: none;
+            color: #DC3545; /* Red for delete */
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 0 5px;
+            margin-left: 8px;
+            line-height: 1;
+            align-self: center; /* Vertically center */
+        }
+        .remove-slot-btn:hover {
+            color: #A71D2A;
+        }
+
         .note-area {
             width: 100%;
             height: 100%;
@@ -192,6 +241,10 @@
         <div id="daily-note-container">
             <label id="daily-note-label" for="daily-note-textarea">本日記事：</label>
             <textarea id="daily-note-textarea" aria-label="本日記事"></textarea>
+        </div>
+
+        <div id="time-slot-controls">
+            <button id="add-time-slot-button" aria-label="新增時段">新增時段</button>
         </div>
 
         <div id="notepad-grid-container">
