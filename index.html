@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>線上記事本</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #212529;
+            line-height: 1.6;
+        }
+        #main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 25px;
+        }
+        #controls-container {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px; 
+        }
+        #date-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #date-picker-container label {
+            font-weight: bold;
+        }
+        #date-picker {
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        #save-button, #remove-character-image-button {
+            padding: 8px 15px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+        #save-button:hover, #remove-character-image-button:hover {
+            background-color: #0056b3;
+        }
+        #remove-character-image-button {
+            background-color: #dc3545; /* Red for remove */
+            margin-top: 10px;
+        }
+        #remove-character-image-button:hover {
+            background-color: #c82333;
+        }
+
+        #save-status {
+            text-align: center;
+            margin-top: -10px; 
+            margin-bottom: 10px;
+            color: #28a745; 
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: none; 
+            height: 1.5em; 
+        }
+
+        #character-image-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #character-image-label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #495057;
+        }
+        #character-image-upload {
+            margin-bottom: 10px;
+        }
+        #character-image-display {
+            max-width: 100%;
+            max-height: 300px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            object-fit: contain; /* Or 'cover' if preferred */
+            margin-bottom: 10px;
+        }
+         #character-image-display:not([src]), #character-image-display[src=""] {
+            display: none; /* Hide if no src */
+         }
+
+
+        #daily-note-container {
+            margin-top: 10px; 
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+        }
+        #daily-note-container label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+        #daily-note-textarea {
+            width: calc(100% - 20px); 
+            min-height: 80px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.95em;
+            line-height: 1.5;
+            resize: vertical;
+        }
+         #daily-note-textarea:focus {
+            outline: none;
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        #notepad-grid-container {
+            /* Styles for notepad grid will be applied to #notepad-container inside this */
+        }
+        #notepad-container {
+            display: grid;
+            grid-template-columns: minmax(120px, auto) repeat(7, 1fr); 
+            gap: 1px;
+            background-color: #dee2e6; 
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            overflow: hidden; 
+        }
+        .grid-cell {
+            background-color: #fff;
+            padding: 0; 
+            display: flex; 
+            align-items: stretch; 
+            justify-content: stretch; 
+        }
+        .header-cell, .time-slot-label {
+            background-color: #e9ecef;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em; 
+        }
+        .time-slot-label {
+            white-space: nowrap;
+        }
+        .note-area {
+            width: 100%;
+            height: 100%;
+            min-height: 100px; 
+            border: none; 
+            padding: 8px;
+            box-sizing: border-box;
+            resize: none;
+            font-family: inherit;
+            font-size: 0.95em;
+            line-height: 1.5;
+            transition: box-shadow 0.2s ease-in-out;
+        }
+        .note-area:focus {
+            outline: none;
+            box-shadow: inset 0 0 0 2px #007bff; 
+            z-index: 1; 
+            position: relative; 
+        }
+    </style>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="main-container">
+        <h1 id="notepad-title">每週記事本</h1>
+        <div id="controls-container">
+            <div id="date-picker-container">
+                <label for="date-picker">選擇日期：</label>
+                <input type="date" id="date-picker">
+            </div>
+            <button id="save-button">儲存筆記</button>
+        </div>
+        <div id="save-status" aria-live="polite"></div>
+
+        <div id="character-image-section">
+            <label id="character-image-label" for="character-image-upload">角色圖片：</label>
+            <input type="file" id="character-image-upload" accept="image/*">
+            <img id="character-image-display" src="" alt="Character Image">
+            <button id="remove-character-image-button" style="display: none;">移除圖片</button>
+        </div>
+
+        <div id="daily-note-container">
+            <label id="daily-note-label" for="daily-note-textarea">本日記事：</label>
+            <textarea id="daily-note-textarea" aria-label="本日記事"></textarea>
+        </div>
+
+        <div id="notepad-grid-container">
+            <!-- Notepad will be rendered here by JS -->
+        </div>
+    </div>
+    <script type="module" src="index.js"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "description": "一個線上的每週記事本應用程式，可記錄星期一至星期日，每日早上8點至晚上10點（每2小時一時段）的記事。",
+  "prompt": "",
+  "requestFramePermissions": [],
+  "name": "App"
+}
