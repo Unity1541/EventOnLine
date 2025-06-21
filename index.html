@@ -10,29 +10,29 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             margin: 0;
             padding: 20px;
-            background-color: #f8f9fa;
-            color: #212529;
+            background-color: #E6F3F7; /* Light sky blue */
+            color: #2C3E50; /* Dark grayish blue */
             line-height: 1.6;
         }
         #main-container {
             max-width: 1200px;
             margin: 0 auto;
-            background-color: #fff;
+            background-color: #FFFFFF; /* Clean white */
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
         }
         h1 {
             text-align: center;
-            color: #343a40;
+            color: #3B7DC4; /* Calm, distinct blue */
             margin-bottom: 25px;
         }
         #controls-container {
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
             align-items: center;
             margin-bottom: 20px;
-            gap: 15px; 
+            gap: 15px;
         }
         #date-picker-container {
             display: flex;
@@ -41,106 +41,78 @@
         }
         #date-picker-container label {
             font-weight: bold;
+            color: #3A506B; /* Muted blue for labels */
         }
         #date-picker {
             padding: 8px;
-            border: 1px solid #ced4da;
+            border: 1px solid #B0C4DE; /* LightSteelBlue */
             border-radius: 4px;
             font-size: 1em;
+            color: #FFFFFF; /* White text */
+            background-color: #3A506B; /* Darker blue background for contrast */
         }
-        #save-button, #remove-character-image-button {
+        #date-picker:focus {
+            outline: none;
+            border-color: #5D9CEC;
+            box-shadow: 0 0 0 0.2rem rgba(93, 156, 236, 0.25);
+        }
+        #save-button {
             padding: 8px 15px;
             font-size: 1em;
-            color: #fff;
-            background-color: #007bff;
+            color: #FFFFFF;
+            background-color: #5D9CEC; /* Friendly blue */
             border: none;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.2s ease-in-out;
         }
-        #save-button:hover, #remove-character-image-button:hover {
-            background-color: #0056b3;
-        }
-        #remove-character-image-button {
-            background-color: #dc3545; /* Red for remove */
-            margin-top: 10px;
-        }
-        #remove-character-image-button:hover {
-            background-color: #c82333;
+        #save-button:hover {
+            background-color: #4A89DC; /* Darker friendly blue */
         }
 
         #save-status {
             text-align: center;
-            margin-top: -10px; 
+            margin-top: -10px;
             margin-bottom: 10px;
-            color: #28a745; 
+            color: #28a745; /* Success green */
             font-weight: bold;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
-            display: none; 
-            height: 1.5em; 
+            display: none;
+            height: 1.5em;
         }
-
-        #character-image-section {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 6px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        #character-image-label {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #495057;
-        }
-        #character-image-upload {
-            margin-bottom: 10px;
-        }
-        #character-image-display {
-            max-width: 100%;
-            max-height: 300px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            object-fit: contain; /* Or 'cover' if preferred */
-            margin-bottom: 10px;
-        }
-         #character-image-display:not([src]), #character-image-display[src=""] {
-            display: none; /* Hide if no src */
-         }
-
 
         #daily-note-container {
-            margin-top: 10px; 
+            margin-top: 10px;
             margin-bottom: 20px;
             padding: 15px;
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
+            background-color: #F4F8FA; /* Very light blue-grey */
+            border: 1px solid #DCE4E8; /* Light border */
             border-radius: 6px;
         }
         #daily-note-container label {
             display: block;
             font-weight: bold;
             margin-bottom: 8px;
-            color: #495057;
+            color: #3A506B; /* Muted blue for labels */
         }
         #daily-note-textarea {
-            width: calc(100% - 20px); 
+            width: calc(100% - 20px);
             min-height: 80px;
             padding: 10px;
-            border: 1px solid #ced4da;
+            border: 1px solid #B0C4DE; /* LightSteelBlue */
             border-radius: 4px;
             font-family: inherit;
             font-size: 0.95em;
             line-height: 1.5;
             resize: vertical;
+            color: #FFFFFF; /* White text */
+            background-color: #3A506B; /* Darker blue background for contrast */
         }
-         #daily-note-textarea:focus {
+        #daily-note-textarea:focus {
             outline: none;
-            border-color: #80bdff;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            border-color: #5D9CEC; /* Friendly blue focus */
+            box-shadow: 0 0 0 0.2rem rgba(93, 156, 236, 0.25);
         }
 
         #notepad-grid-container {
@@ -148,29 +120,30 @@
         }
         #notepad-container {
             display: grid;
-            grid-template-columns: minmax(120px, auto) repeat(7, 1fr); 
+            grid-template-columns: minmax(120px, auto) repeat(7, 1fr);
             gap: 1px;
-            background-color: #dee2e6; 
-            border: 1px solid #dee2e6;
+            background-color: #C5D9E0; /* Grid lines color - muted blue/grey */
+            border: 1px solid #C5D9E0;
             border-radius: 4px;
-            overflow: hidden; 
+            overflow: hidden;
         }
         .grid-cell {
-            background-color: #fff;
-            padding: 0; 
-            display: flex; 
-            align-items: stretch; 
-            justify-content: stretch; 
+            background-color: #FFFFFF; /* White cells - this is for the cell itself, note-area inside will have its own bg */
+            padding: 0;
+            display: flex;
+            align-items: stretch;
+            justify-content: stretch;
         }
         .header-cell, .time-slot-label {
-            background-color: #e9ecef;
+            background-color: #E0EAF0; /* Light muted blue for headers */
             font-weight: bold;
             text-align: center;
             padding: 10px 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9em; 
+            font-size: 0.9em;
+            color: #3A506B; /* Muted blue text for headers */
         }
         .time-slot-label {
             white-space: nowrap;
@@ -178,8 +151,8 @@
         .note-area {
             width: 100%;
             height: 100%;
-            min-height: 100px; 
-            border: none; 
+            min-height: 100px;
+            border: none;
             padding: 8px;
             box-sizing: border-box;
             resize: none;
@@ -187,12 +160,19 @@
             font-size: 0.95em;
             line-height: 1.5;
             transition: box-shadow 0.2s ease-in-out;
+            color: #FFFFFF; /* White text */
+            background-color: #3A506B; /* Darker blue background for contrast */
         }
         .note-area:focus {
             outline: none;
-            box-shadow: inset 0 0 0 2px #007bff; 
-            z-index: 1; 
-            position: relative; 
+            box-shadow: inset 0 0 0 2px #5D9CEC; /* Friendly blue focus */
+            z-index: 1;
+            position: relative;
+        }
+
+        /* Styling for ::-webkit-calendar-picker-indicator to make it visible on dark background */
+        #date-picker::-webkit-calendar-picker-indicator {
+            filter: invert(1); /* Inverts colors, making dark icon light */
         }
     </style>
 <link rel="stylesheet" href="/index.css">
@@ -208,13 +188,6 @@
             <button id="save-button">儲存筆記</button>
         </div>
         <div id="save-status" aria-live="polite"></div>
-
-        <div id="character-image-section">
-            <label id="character-image-label" for="character-image-upload">角色圖片：</label>
-            <input type="file" id="character-image-upload" accept="image/*">
-            <img id="character-image-display" src="" alt="Character Image">
-            <button id="remove-character-image-button" style="display: none;">移除圖片</button>
-        </div>
 
         <div id="daily-note-container">
             <label id="daily-note-label" for="daily-note-textarea">本日記事：</label>
